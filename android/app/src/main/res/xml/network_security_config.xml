@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Consente traffico non sicuro (HTTP) per i domini specificati -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">conts.it</domain>  <!-- Sostituisci con il tuo dominio -->
+    </domain-config>
+
+    <!-- Se hai bisogno di abilitare traffico non sicuro per altri domini, aggiungili qui -->
+    <!--
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">altro-dominio.com</domain>
+    </domain-config>
+    -->
+</network-security-config>
