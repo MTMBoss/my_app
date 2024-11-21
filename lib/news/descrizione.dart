@@ -3,7 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:html/parser.dart' as html;
 import 'package:html/dom.dart' as dom;
 import 'package:flutter/gestures.dart';
-import 'package:my_app/news/file_utils.dart'; // Assicurati che questo percorso sia corretto
+import 'package:url_launcher/url_launcher.dart';
+import 'package:logger/logger.dart';
+
+// Crea un'istanza del logger
+final logger = Logger();
 
 class DescrizionePage extends StatelessWidget {
   final Map<String, String> newsData;
@@ -21,7 +25,16 @@ class DescrizionePage extends StatelessWidget {
         return 'Errore nel recupero della pagina: ${response.statusCode}';
       }
     } catch (e) {
+      logger.d('Errore durante il recupero della descrizione: $e');
       return 'Errore: $e';
+    }
+  }
+
+  void handleTap(String? url) async {
+    if (url != null && await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      logger.d('URL non valido: $url');
     }
   }
 
@@ -34,9 +47,14 @@ class DescrizionePage extends StatelessWidget {
         future: fetchNewsDescription(newsUrl),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError || !snapshot.hasData) {
-            return Center(child: Text('Errore nel caricamento della descrizione', style: TextStyle(color: Colors.white)));
+            return const Center(
+              child: Text(
+                'Errore nel caricamento della descrizione',
+                style: TextStyle(color: Colors.white),
+              ),
+            );
           } else {
             final document = html.parse(snapshot.data!);
             final paragraphs = document.querySelectorAll('p');
@@ -49,16 +67,21 @@ class DescrizionePage extends StatelessWidget {
                   textSpans.add(
                     TextSpan(
                       text: node.text,
-                      style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => handleTap(href),
+                        ..onTap = () => handleTap(href?.startsWith('/') == true
+                            ? 'https://conts.it$href'
+                            : href),
                     ),
                   );
                 } else if (node is dom.Text) {
                   textSpans.add(TextSpan(text: node.text));
                 }
               }
-              textSpans.add(TextSpan(text: '\n\n'));
+              textSpans.add(const TextSpan(text: '\n\n'));
             }
 
             return Padding(
@@ -70,14 +93,16 @@ class DescrizionePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('Indietro'),
+                    child: const Text('Indietro'),
                   ),
-                  SizedBox(height: 16),
-                  SingleChildScrollView(
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                        children: textSpans,
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(fontSize: 16, color: Colors.white),
+                          children: textSpans,
+                        ),
                       ),
                     ),
                   ),
