@@ -2,48 +2,85 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>My App</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>my_app</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>My App</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>my_app</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+    
+    <!-- Permetti all'app di verificare se un URL può essere aperto. -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>https</string>
+        <string>http</string>
+    </array>
+
+    <!-- Permessi per l'accesso a diverse funzionalità -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Questo app ha bisogno di accedere alla tua libreria di foto per salvare i file.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Questo app ha bisogno di accedere al tuo microfono per registrare audio.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Questo app ha bisogno di accedere alla tua fotocamera per scattare foto.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Questo app ha bisogno di accedere alla tua posizione mentre stai usando l'app.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Questo app ha bisogno di accedere alla tua posizione anche quando l'app è in background.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Questo app ha bisogno di accedere alla tua posizione sempre.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi contatti per importare le informazioni.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>Questo app ha bisogno di accedere al Bluetooth per connettersi ai dispositivi.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi calendari per importare le informazioni.</string>
+    <key>NSRemindersUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi promemoria per importare le informazioni.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi sensori di movimento per migliorare l'esperienza.</string>
+    <key>NSHealthShareUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi dati sanitari per condividere informazioni.</string>
+    <key>NSHealthUpdateUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi dati sanitari per aggiornare le informazioni.</string>
+    <key>NSFileProviderDomainUsageDescription</key>
+    <string>Questo app ha bisogno di accedere ai tuoi file per importare le informazioni.</string>
 </dict>
 </plist>

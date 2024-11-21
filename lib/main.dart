@@ -5,6 +5,7 @@ import 'news/news.dart';
 import 'pass/pass.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

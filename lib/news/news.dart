@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'descrizione.dart';
 import 'news_scraper.dart';
 
 class NewsPage extends StatelessWidget {
@@ -27,39 +28,49 @@ class NewsPage extends StatelessWidget {
               itemCount: newsDataList.length,
               itemBuilder: (context, index) {
                 final newsData = newsDataList[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 4.0), // Reduce vertical margin
-                  decoration: BoxDecoration(
-                    color: Colors.grey[850],
-                    border: Border.all(color: Colors.grey[850]!), // Same color as background
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        color: Colors.grey[700],
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          newsData['date']!,
-                          style: TextStyle(color: Colors.white),
-                        ),
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DescrizionePage(newsData: newsData),
                       ),
-                      Container(
-                        padding: EdgeInsets.zero, // Remove padding completely
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              newsData['body']!.trimLeft(), // Trim leading spaces
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.left,
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 4.0), // Reduce vertical margin
+                    decoration: BoxDecoration(
+                      color: Colors.grey[850],
+                      border: Border.all(color: Colors.grey[850]!), // Same color as background
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          color: Colors.grey[700],
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            newsData['date']!,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.zero, // Remove padding completely
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                newsData['body']!.trimLeft(), // Trim leading spaces
+                                style: TextStyle(color: Colors.white),
+                                textAlign: TextAlign.left,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

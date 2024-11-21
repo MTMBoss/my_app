@@ -12,11 +12,13 @@ Future<List<Map<String, String>>> scrapeNews() async {
       for (var card in newsCards) {
         final dateElement = card.querySelector('p.news-date');
         final bodyElement = card.querySelector('p.news-body');
+        final linkElement = card.querySelector('a');
 
-        if (dateElement != null && bodyElement != null) {
+        if (dateElement != null && bodyElement != null && linkElement != null) {
           newsDataList.add({
             'date': dateElement.text,
             'body': bodyElement.text,
+            'link': linkElement.attributes['href']!,
           });
         }
       }
