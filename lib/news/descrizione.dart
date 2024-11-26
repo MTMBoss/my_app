@@ -43,11 +43,22 @@ class DescrizionePage extends StatelessWidget {
     final newsUrl = 'https://conts.it${newsData['link']}'; // Assicurati che l'URL sia completo
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Descrizione', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.black87,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: FutureBuilder<String>(
         future: fetchNewsDescription(newsUrl),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: Colors.white));
           } else if (snapshot.hasError || !snapshot.hasData) {
             return const Center(
               child: Text(
@@ -89,12 +100,6 @@ class DescrizionePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Indietro'),
-                  ),
                   const SizedBox(height: 16),
                   Expanded(
                     child: SingleChildScrollView(
@@ -112,6 +117,7 @@ class DescrizionePage extends StatelessWidget {
           }
         },
       ),
+      backgroundColor: Colors.black87,
     );
   }
 }

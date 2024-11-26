@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   dio: ^5.7.0
   html: ^0.15.5
+  intl: ^0.17.0
+  intl_translation: ^0.18.0
   logger: ^2.5.0
   logging: ^1.0.2
   url_launcher: ^6.3.1
