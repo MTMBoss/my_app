@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'descrizione.dart';
 import 'news_scraper.dart';
+import 'file_utils.dart';
+import 'styles.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:logger/logger.dart';
-
-// Crea un'istanza del logger
-final logger = Logger();
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -82,10 +80,8 @@ class NewsPage extends StatelessWidget {
               try {
                 final englishDate = convertToEnglishMonth(newsData['date']!);
                 final newsDate = dateFormat.parseStrict(englishDate);
-                logger.d('Data parsing riuscito: $newsDate');
                 return newsDate.isAfter(filterDate) || newsDate.isAtSameMomentAs(filterDate);
               } catch (e) {
-                logger.e('Errore durante il parsing della data: ${newsData['date']}', error: e);
                 return false;
               }
             }).toList();
@@ -116,45 +112,20 @@ class NewsPage extends StatelessWidget {
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.black87, Colors.black54],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(12.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromARGB(255, 85, 85, 85).withAlpha(128),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
+                    decoration: newsCardDecoration,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Colors.deepPurple[700]!, Colors.deepPurple[500]!],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(12.0),
-                              topRight: Radius.circular(12.0),
-                            ),
-                          ),
+                          decoration: newsCardHeaderDecoration,
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 newsData['date']!,
-                                style: const TextStyle(color: Colors.white, fontSize: 16),
+                                style: newsDateStyle,
                               ),
                               const Icon(Icons.event, color: Colors.white),
                             ],
@@ -164,10 +135,23 @@ class NewsPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             newsData['body']!.trimLeft(),
-                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                            style: newsBodyStyle,
                             textAlign: TextAlign.left,
                           ),
                         ),
+                        if (newsData['pdfLink'] != null && newsData['pdfLink']!.isNotEmpty)
+                          Container(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                handleTap(context, newsData['pdfLink']);
+                              },
+                              child: Text(
+                                'Apri PDF',
+                                style: pdfLinkStyle,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),

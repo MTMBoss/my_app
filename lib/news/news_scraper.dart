@@ -12,13 +12,15 @@ Future<List<Map<String, String>>> scrapeNews() async {
       for (var card in newsCards) {
         final dateElement = card.querySelector('p.news-date');
         final bodyElement = card.querySelector('p.news-body');
-        final linkElement = card.querySelector('a');
+        final pdfLinkElements = card.querySelectorAll('div.doc-file a');
+        final List<String> pdfLinks = pdfLinkElements.map((element) => element.attributes['href'] ?? '').toList();
 
-        if (dateElement != null && bodyElement != null && linkElement != null) {
+        if (dateElement != null && bodyElement != null) {
           newsDataList.add({
             'date': dateElement.text,
             'body': bodyElement.text,
-            'link': linkElement.attributes['href']!,
+            'pdfLinks': pdfLinks.join(','), // Salva tutti i link PDF separati da una virgola
+            'link': card.querySelector('a')?.attributes['href'] ?? '', // Aggiungi il link alla notizia
           });
         }
       }

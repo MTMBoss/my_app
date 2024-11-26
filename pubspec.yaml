@@ -39,6 +39,7 @@ dependencies:
   url_launcher: ^6.3.1
   open_file: ^3.5.10
   path_provider: ^2.0.11
+  flutter_pdfview: ^1.0.0
   permission_handler: ^10.4.5
 
   # The following adds the Cupertino Icons font to your application.
